@@ -1,7 +1,15 @@
 {
   "name": "Shift2App",
+  "description": "Say goodbye to time-consuming development. Convert your web app into native Android and iOS apps with ease. Streamline deployment and expand your user base effortlessly.",
   "version": "0.0.1",
   "private": true,
+  "author": {
+    "name": "Srikanth Nani",
+    "email": "srikanthnani1202@gmail.com",
+    "twitter": "https://twitter.com/truly_sn",
+    "github": "https://github.com/iamsrikanthnani",
+    "url": "https://srikanthnani.com/"
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",

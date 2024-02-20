@@ -1,79 +1,77 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Shift2App
 
-# Getting Started
+🚀 Convert Your Web App to Native Android and iOS Apps Effortlessly!
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+<div align="center">
+  <img src="./img/screenshot.png" alt="Shift2App screenshot" width="800">
+</div>
 
-## Step 1: Start the Metro Server
+Shift2App is a powerful tool that streamlines the process of converting your responsive web app into native Android and iOS applications. With easy-to-use configurations and seamless integration, Shift2App saves you valuable time and effort, allowing you to expand your user base across multiple platforms quickly.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Why Shift2App?
 
-To start Metro, run the following command from the _root_ of your React Native project:
+⏱️ **Save Time:** Say goodbye to time-consuming development. With Shift2App, you can convert your web app to native mobile apps in minutes, not weeks.
+
+📱 **Multi-Platform Deployment:** Reach a wider audience by deploying your app on both Android and iOS platforms simultaneously.
+
+🛠️ **Easy Configuration:** Customize your app with environment-based configurations for package name, app name, icons, logo, splash screen, version codes, and more.
+
+🌐 **Webview Integration:** Seamlessly integrate web content into your native app using flexible webview configurations.
+
+## Getting Started
+
+Follow these steps to get started with Shift2App:
+
+#### 1. Clone this repository.
 
 ```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
+git clone https://github.com/iamsrikanthnani/Shift2App
 ```
 
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
+#### 2. Navigate to the project directory.
 
 ```bash
-# using npm
-npm run android
+cd Shift2App
+```
 
-# OR using Yarn
+#### 3. Install dependencies:
+
+```bash
+yarn install
+```
+
+or `npm install`
+
+#### 4. Run the app on Android:
+
+```bash
 yarn android
 ```
 
-### For iOS
+or `npm android`
+
+#### 5. Run the app on iOS:
 
 ```bash
-# using npm
-npm run ios
-
-# OR using Yarn
 yarn ios
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+or `npm ios` don't forget to run `cd ios/pod install`
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## Future Development
 
-## Step 3: Modifying your App
+- Adding support for animated splash screens with customizable logos.
+- Introducing environment-based configurations for app name, icons, logo, version codes, and webview URL([check this repo](https://github.com/iamsrikanthnani/react-native-template)).
+- Over-the-Air(OTA) updates
 
-Now that you have successfully run the app, let's modify it.
+## Contribution
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+Contributions are welcome! Feel free to open issues and pull requests to improve Shift2App.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## Contact
 
-## Congratulations! :tada:
+📧 **Contact Me:** For assistance with setup, configurations, or any additional features, feel free to reach out to me at [srikanthnani1202@gmail.com](mailto:srikanthnani1202@gmail.com).
 
-You've successfully run and modified your React Native App. :partying_face:
+## License
 
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+This project is licensed under the [MIT License](LICENSE).

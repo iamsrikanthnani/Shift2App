@@ -1,118 +1,79 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, {useRef, useEffect, useState} from 'react';
+import {View, BackHandler, ToastAndroid, StatusBar} from 'react-native';
+import WebView, {WebViewNavigation} from 'react-native-webview';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+const App: React.FC = () => {
+  const insets = useSafeAreaInsets();
+  // Ref to WebView component
+  const webViewRef = useRef<WebView | null>(null);
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  // State to track whether WebView can go back
+  const [canGoBack, setCanGoBack] = useState<boolean>(false);
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+  // State to track back button click count for exit confirmation
+  const [backClickCount, setBackClickCount] = useState<number>(0);
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+  // State to track status bar color
+  const statusBarColor = '#20232a';
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  useEffect(() => {
+    // Function to handle back button press
+    const backAction = (): boolean => {
+      if (canGoBack) {
+        // If WebView can go back, navigate back
+        webViewRef.current?.goBack();
+        return true;
+      } else {
+        if (backClickCount === 0) {
+          // If backClickCount is 0, show toast and set count to 1
+          ToastAndroid.show('Press back again to exit', ToastAndroid.SHORT);
+          setBackClickCount(1);
+          // Reset count after 2 seconds
+          setTimeout(() => setBackClickCount(0), 2000);
+          return true;
+        } else {
+          // If backClickCount is not 0, exit the app
+          return false;
+        }
+      }
+    };
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    // Add event listener for hardware back press
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    // Remove event listener when component unmounts
+    return () => backHandler.remove();
+  }, [canGoBack, backClickCount]);
+
+  // Function to handle WebView navigation state change
+  const handleNavigationStateChange = (navState: WebViewNavigation): void => {
+    // Update canGoBack state based on navigation state
+    setCanGoBack(navState.canGoBack);
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <SafeAreaView
+      edges={['right', 'top', 'left']}
+      style={{flex: 1, backgroundColor: statusBarColor}}>
+      {/* Status bar */}
+      <StatusBar backgroundColor={statusBarColor} />
+
+      {/* WebView component */}
+      <WebView
+        ref={webViewRef}
+        source={{uri: 'https://reactnative.dev/'}}
+        javaScriptEnabled={true} // Enable JavaScript
+        domStorageEnabled={true} // Enable DOM storage
+        startInLoadingState={true} // Start with loading indicator
+        automaticallyAdjustContentInsets={false} // Do not adjust content insets automatically
+        onNavigationStateChange={handleNavigationStateChange} // Handle navigation state change
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
     </SafeAreaView>
   );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+};
 
 export default App;
